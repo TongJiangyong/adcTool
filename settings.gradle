@@ -1,1 +1,1 @@
-include ':app', ':cpplibrary'
+include ':app', ':cpplibrary', ':javalibrary', ':releaselibrary'
