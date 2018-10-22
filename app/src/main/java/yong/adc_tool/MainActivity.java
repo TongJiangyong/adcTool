@@ -8,8 +8,8 @@ import android.view.SurfaceView;
 
 import java.io.File;
 
-import adc_tool.collection.CameraHelpAPI1;
 import agora.LibyuvJava;
+import agora.collection.CameraHelpAPI1;
 
 /**
  * Created by yong on 2018/10/8.
