@@ -2,7 +2,6 @@ package adc_tool.conversion;
 
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
-import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,12 +10,17 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import adc_tool.conversion.openGlBase.gles.GlUtil;
+
+
 /**
  * Created by yong on 2018/10/14.
  */
 
 public class ImageChange {
 
+
+    //TODO uncheck
     public static int[] I420toARGB(byte[] yuv, int width, int height) {
         boolean invertHeight = false;
         if (height < 0) {
@@ -76,17 +80,13 @@ public class ImageChange {
      * <p>
      * Expects that this object's EGL surface is current.
      */
-    public void saveFrame(File file) throws IOException {
-/*        if (!mEglCore.isCurrent(mEGLSurface)) {
-            throw new RuntimeException("Expected EGL context/surface is not current");
-        }
-
+    public void saveFrame(File file,int width,int height) throws IOException {
         // glReadPixels fills in a "direct" ByteBuffer with what is essentially big-endian RGBA
         // data (i.e. a byte of red, followed by a byte of green...).  While the Bitmap
         // constructor that takes an int[] wants little-endian ARGB (blue/red swapped), the
         // Bitmap "copy pixels" method wants the same format GL provides.
         //
-        // Ideally we'd have some way to re-use the ByteBuffer, especially if we're calling
+        // Ideally we'OffscreenSurface have some way to re-use the ByteBuffer, especially if we're calling
         // here often.
         //
         // Making this even more interesting is the upside-down nature of GL, which means
@@ -94,9 +94,6 @@ public class ImageChange {
         // typical GL conventions are used.
 
         String filename = file.toString();
-
-        int width = getWidth();
-        int height = getHeight();
         ByteBuffer buf = ByteBuffer.allocateDirect(width * height * 4);
         buf.order(ByteOrder.LITTLE_ENDIAN);
         GLES20.glReadPixels(0, 0, width, height,
@@ -114,6 +111,5 @@ public class ImageChange {
         } finally {
             if (bos != null) bos.close();
         }
-        Log.d(TAG, "Saved " + width + "x" + height + " frame as '" + filename + "'");*/
     }
 }
