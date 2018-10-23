@@ -37,7 +37,7 @@ set(COMMON_PATH ${SRC_PATH}/libyuvWrap)
 message("COMMON_PATH ${COMMON_PATH}")
 set(SOURCES
 	${COMMON_PATH}/libyuvWrap.cpp
-	${SRC_PATH}/libyuvJNI/libyuvCpp.cpp
+	${SRC_PATH}/libyuvJNI/libyuvJni.cpp
 )
 
 

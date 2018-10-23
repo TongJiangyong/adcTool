@@ -2,8 +2,8 @@
 // Created by yong on 2018/10/22.
 //
 #include <jni.h>
-#ifndef ADCTOOL_LIBYUVCPPWRAP_H
-#define ADCTOOL_LIBYUVCPPWRAP_H
+#ifndef ADCTOOL_LIBYUVJni_H
+#define ADCTOOL_LIBYUVJni_H
 
 #ifdef __cplusplus
 extern "C" {
