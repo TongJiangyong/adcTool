@@ -16,7 +16,6 @@ set(SRCPATH ${CMAKE_CURRENT_SOURCE_DIR})
 message("${CMAKE_CURRENT_SOURCE_DIR}")
 message("${SRCPATH}")
 
-include_directories("${SRCPATH}/libyuvWrap/include")
 include_directories("${SRCPATH}/libyuvWrap")
 include_directories("${SRCPATH}/libyuvJNI")
 set(TARGET_NAME ${PROJECT_NAME})
@@ -36,8 +35,8 @@ message("SRC_PATH ${SRC_PATH}")
 set(COMMON_PATH ${SRC_PATH}/libyuvWrap)
 message("COMMON_PATH ${COMMON_PATH}")
 set(SOURCES
+	${SRC_PATH}/libyuvJNI/libyuvJni.cpp
 	${COMMON_PATH}/libyuvWrap.cpp
-	${SRC_PATH}/libyuvJNI/libyuvCpp.cpp
 )
 
 
