@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.adcToolJava'
 def getProductName() {
     return "$javaToolName" //这里是你自定义的名称
 }

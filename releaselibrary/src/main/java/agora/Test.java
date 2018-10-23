@@ -6,6 +6,7 @@ package agora;
 
 public class Test {
     public static String testString(){
+        LibyuvJava libyuvJava;
         return "just a test";
     }
 }
