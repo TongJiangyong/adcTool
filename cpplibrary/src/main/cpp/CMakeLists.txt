@@ -18,6 +18,7 @@ message("${SRCPATH}")
 
 include_directories("${SRCPATH}/libyuvWrap/include")
 include_directories("${SRCPATH}/libyuvWrap")
+include_directories("${SRCPATH}/libyuvJNI")
 set(TARGET_NAME ${PROJECT_NAME})
 message("target name ${TARGET_NAME}")
 set (PUBLIC_YUV_LIBS ${SRCPATH}/libyuvWrap/${ANDROID_ABI}/libyuv.a)
@@ -36,7 +37,7 @@ set(COMMON_PATH ${SRC_PATH}/libyuvWrap)
 message("COMMON_PATH ${COMMON_PATH}")
 set(SOURCES
 	${COMMON_PATH}/libyuvWrap.cpp
-	${SRC_PATH}/libyuvCpp.cpp
+	${SRC_PATH}/libyuvJNI/libyuvCpp.cpp
 )
 
 
