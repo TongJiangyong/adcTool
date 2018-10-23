@@ -16,10 +16,6 @@ android {
             abiFilters "armeabi-v7a" // DO NOT MODIFY THIS LINE, IT'S UPDATED BY BUILD MACHINE AUTOMATICALLY.
         }
 
-        packagingOptions {
-            doNotStrip '*/mips/*.so'
-            doNotStrip '*/mips64/*.so'
-        }
 
     }
 
