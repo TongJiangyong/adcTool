@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+def getProductName() {
+    return "$cppToolName"  //这里是你自定义的名称
+}
+
 android {
     compileSdkVersion 26
 
@@ -8,21 +12,23 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "$appVersion"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters "armeabi-v7a" // DO NOT MODIFY THIS LINE, IT'S UPDATED BY BUILD MACHINE AUTOMATICALLY.
-        }
-        packagingOptions {
-            doNotStrip '*/mips/*.so'
-            doNotStrip '*/mips64/*.so'
+            abiFilters "armeabi-v7a"
+            // DO NOT MODIFY THIS LINE, IT'S UPDATED BY BUILD MACHINE AUTOMATICALLY.
         }
 
 
     }
 
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = getProductName() + "_${defaultConfig.versionName}" + '.aar'
+        }
+    }
 
     buildTypes {
         release {

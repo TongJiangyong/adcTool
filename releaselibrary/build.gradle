@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.adcTool'
+group = 'com.github.adcTool'
 
 android {
     compileSdkVersion 26
@@ -25,9 +25,17 @@ android {
     }
 
 }
+repositories {
+    flatDir {
+        dirs 'libs'   // aar目录
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //compile(name: "$cppToolName" + "_" + "$appVersion", ext: 'aar')
+    //compile(name: "$javaToolName" + "_" + "$appVersion", ext: 'aar')
 
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'

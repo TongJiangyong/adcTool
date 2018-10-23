@@ -10,15 +10,11 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "$appVersion"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
             abiFilters "armeabi-v7a" // DO NOT MODIFY THIS LINE, IT'S UPDATED BY BUILD MACHINE AUTOMATICALLY.
-        }
-        packagingOptions {
-            doNotStrip '*/mips/*.so'
-            doNotStrip '*/mips64/*.so'
         }
 
     }
