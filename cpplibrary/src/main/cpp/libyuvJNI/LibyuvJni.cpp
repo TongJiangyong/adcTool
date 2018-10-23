@@ -14,7 +14,7 @@
 #include <android/bitmap.h>
 #include <malloc.h>
 #include <math.h>
-#include "LibyuvCpp.h"
+#include "LibyuvJni.h"
 #include "libyuvWrap.h"
 #ifdef __cplusplus
 extern "C" {
