@@ -4,10 +4,12 @@ A useful tool for easier android coding
 
 Structure
 ----------------
+
 cpplibray
     |-------libDataTraJNI    example of data transfer between java and native       
     |-------libyuvWrap       a wrap for libyuv which include java apis   
-	
+
+
 javalibray
     |----collection
 			|-------CameraHelpAPI1   wrap for java camera api 1
@@ -22,7 +24,8 @@ javalibray
 			|----player   a player use mediacodec  
     |----UI			
 
-	
+
+
 How to use
 ----------------
 Step 1. Add the JitPack repository to your build file
