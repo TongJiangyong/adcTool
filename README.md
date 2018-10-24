@@ -6,21 +6,21 @@ Structure
 ----------------
 
 	cpplibray
-	    |-------libDataTraJNI    example of data transfer between java and native       
-	    |-------libyuvWrap       a wrap for libyuv which include java apis   
+	    |-------libDataTraJNI                   example of data transfer between java and native       
+	    |-------libyuvWrap                      a wrap for libyuv which include java apis   
 
 	javalibray
 	    |----collection
-			|-------CameraHelpAPI1   wrap for java camera api 1
-			|-------CameraHelpAPI2   wrap for java camera api 2
+			|-------CameraHelpAPI1               wrap for java camera api 1
+			|-------CameraHelpAPI2              wrap for java camera api 2
 	    |----conversion
-			|----ImageChange   useful method of image format change 
-			|----TextrureMovieEncoder   a encoder for texture and saved as mp4
-			|----VaryTools    utils for texture conversion
+			|----ImageChange                    useful method of image format change 
+			|----TextrureMovieEncoder           a encoder for texture and saved as mp4
+			|----VaryTools                   utils for texture conversion
 	    |----FileIo
-			|----FileHelper	  utils for io
+			|----FileHelper	                utils for io
 	    |----mediaCodec
-			|----player   a player use mediacodec  
+			|----player                     a player use mediacodec  
 	    |----UI	
     
 How to use
