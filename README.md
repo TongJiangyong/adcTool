@@ -5,13 +5,14 @@ A useful tool for easier android coding
 Structure
 ----------------
 
+
+
 cpplibray
     |-------libDataTraJNI    example of data transfer between java and native       
     |-------libyuvWrap       a wrap for libyuv which include java apis   
 
 javalibray
     |----collection
-	
 			|-------CameraHelpAPI1   wrap for java camera api 1
 			|-------CameraHelpAPI2   wrap for java camera api 2
     |----conversion
