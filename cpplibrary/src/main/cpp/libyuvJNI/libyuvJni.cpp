@@ -14,7 +14,7 @@
 #include <android/bitmap.h>
 #include <malloc.h>
 #include <math.h>
-#include "LibyuvJni.h"
+#include "libyuvJni.h"
 #include "libyuvWrap.h"
 #ifdef __cplusplus
 extern "C" {
@@ -22,14 +22,15 @@ extern "C" {
 
 
 JNIEXPORT void JNICALL
-Java_agora_LibyuvJava_testConnectToJni(JNIEnv *env, jclass type) {
+Java_agora_Libyuv_LibyuvJava_testConnectToJni(JNIEnv *env, jclass type) {
+
     __android_log_print(ANDROID_LOG_INFO, "LibyuvCpp", "testConnect");
 
 }
 
 static LibyuvWrap *libyuvWrap=new LibyuvWrap;
 JNIEXPORT void JNICALL
-Java_agora_LibyuvJava_FMTtoYUV420Planer(JNIEnv *env, jobject instance, jbyteArray pData_,
+Java_agora_Libyuv_LibyuvJava_FMTtoYUV420Planer(JNIEnv *env, jobject instance, jbyteArray pData_,
                                             jint nLen, jint nWidth, jint nHeight, jint pixFmt,
                                             jint nDegree, jbyteArray pOu_) {
     jbyte *pData = env->GetByteArrayElements(pData_, NULL);

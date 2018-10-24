@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -120,6 +121,19 @@ public class FileHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static byte[] conver(ByteBuffer byteBuffer){
+        int len = byteBuffer.limit() - byteBuffer.position();
+        byte[] bytes = new byte[len];
+
+        if(byteBuffer.isReadOnly()){
+            return null;
+        }else {
+            byteBuffer.get(bytes);
+        }
+        return bytes;
     }
 
 }
