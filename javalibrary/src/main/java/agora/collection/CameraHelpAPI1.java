@@ -17,7 +17,7 @@ import java.util.List;
  * Created by yong on 2018/10/8.
  */
 
-public class CameraHelpAPI1 implements Camera.PreviewCallback{
+public class CameraHelpAPI1 implements Camera.PreviewCallback {
 
     public static final String TAG = "CameraHelpAPI1";
     private Camera mCamera;
@@ -26,12 +26,12 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
     private SurfaceTexture surfaceTexture;
     private List<PreviewFrameCallback> previewFrameCallbackList;
 
-    public CameraHelpAPI1(){
+    public CameraHelpAPI1() {
         previewFrameCallbackList = new ArrayList<>(1);
     }
 
     public Camera getCameraInstance(int id) {
-        if(mCamera!=null){
+        if (mCamera == null) {
             mCamera = Camera.open(id);
         }
         return mCamera;
@@ -41,8 +41,8 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
      * @return the default rear/back facing camera on the device. Returns null if camera is not
      * available.
      */
-    public  Camera getDefaultBackFacingCameraInstance() {
-        if(mCamera!=null){
+    public Camera getDefaultBackFacingCameraInstance() {
+        if (mCamera == null) {
             mCamera = getDefaultCamera(Camera.CameraInfo.CAMERA_FACING_BACK);
         }
         return mCamera;
@@ -53,12 +53,14 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
      * available.
      */
     public Camera getDefaultFrontFacingCameraInstance() {
-        return getDefaultCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
+        if (mCamera == null) {
+            mCamera = getDefaultCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
+        }
+        return mCamera;
     }
 
 
     /**
-     *
      * @param position Physical position of the camera i.e Camera.CameraInfo.CAMERA_FACING_FRONT
      *                 or Camera.CameraInfo.CAMERA_FACING_BACK.
      * @return the default camera on the device. Returns null if camera is not available.
@@ -66,9 +68,9 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     private Camera getDefaultCamera(int position) {
         // Find the total number of cameras available
-        int  mNumberOfCameras = Camera.getNumberOfCameras();
+        int mNumberOfCameras = Camera.getNumberOfCameras();
 
-        Log.i(TAG, "getDefaultCamera number:"+mNumberOfCameras+" position:"+position);
+        Log.i(TAG, "getDefaultCamera number:" + mNumberOfCameras + " position:" + position);
 
         // Find the ID of the back-facing ("default") camera
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
@@ -105,9 +107,6 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
     }
 
 
-
-
-
     /**
      * Attempts to find a fixed preview frame rate that matches the desired frame rate.
      * <p>
@@ -118,7 +117,7 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
      * @return The expected frame rate, in thousands of frames per second.
      */
     public int chooseFixedPreviewFps(int desiredThousandFps) {
-        desiredThousandFps = desiredThousandFps*1000;
+        desiredThousandFps = desiredThousandFps * 1000;
         Camera.Parameters parms = mCamera.getParameters();
         List<int[]> supported = parms.getSupportedPreviewFpsRange();
 
@@ -153,7 +152,7 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
      * @param h The height of the view.
      * @return Best match camera preview size to fit in the view.
      */
-    public  Camera.Size getOptimalPreviewSize(int w, int h) {
+    public Camera.Size getOptimalPreviewSize(int w, int h) {
         Camera.Parameters parameters = mCamera.getParameters();
         List<Camera.Size> sizes = parameters.getSupportedPreviewSizes();
         Log.i(TAG, "getOptimalPreviewSize");
@@ -204,19 +203,17 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
     }
 
     /**
-     *
-     * @param imageFormat
-     * NV21
+     * @param imageFormat NV21
      */
-    public void setPreviewFormat(int imageFormat){
+    public void setPreviewFormat(int imageFormat) {
         Camera.Parameters parameters = mCamera.getParameters();
         parameters.setPreviewFormat(imageFormat);
     }
 
-    public boolean setSurfaceTexture(SurfaceTexture surfaceTexture){
+    public boolean setSurfaceTexture(SurfaceTexture surfaceTexture) {
         this.surfaceTexture = surfaceTexture;
         boolean isSetTextureOk = false;
-        if(mCamera!=null){
+        if (mCamera != null) {
             try {
                 this.mCamera.setPreviewTexture(this.surfaceTexture);
                 isSetTextureOk = true;
@@ -229,39 +226,38 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
     }
 
     /**
-     *
-     * @param rotation
-     * 0,90,180,270
+     * @param rotation 0,90,180,270
      */
-    public void setDisplayOrientation(int rotation){
+    public void setDisplayOrientation(int rotation) {
         mCamera.setDisplayOrientation(rotation);
     }
 
-    public void enablePreviewCallback(){
+    public void enablePreviewCallback() {
         mCamera.setPreviewCallback(this);
     }
 
 
     /**
-     *  a example of how to use this tool
-     *  need to make sure the holder is ready
-     * @param holder fsdfsdf
+     * a example of how to use this tool
+     * need to make sure the holder is ready
+     *
+     * @param holder         fsdfsdf
      * @param cameraId
-     * @param width fsdfsdf
+     * @param width          fsdfsdf
      * @param height
      * @param fps
      * @param enableCallback
      * @return
      */
-    public boolean openCameraForPreview(SurfaceHolder holder,int cameraId,int width,int height,int fps,boolean enableCallback){
+    public boolean openCameraForPreview(SurfaceHolder holder, int cameraId, int width, int height, int fps, boolean enableCallback) {
         releaseCamera();
         mCamera = getDefaultCamera(cameraId);
-        if(mCamera!=null&&holder!=null){
+        if (mCamera != null && holder != null) {
             Camera.Size optimalSize = this.getOptimalPreviewSize(width, height);
             int previewFrameRate = this.chooseFixedPreviewFps(fps);
             //this.setDisplayOrientation(90);
             this.setPreviewFormat(ImageFormat.NV21);
-            if(enableCallback){
+            if (enableCallback) {
                 this.enablePreviewCallback();
             }
             try {
@@ -272,35 +268,43 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback{
             }
             mCamera.startPreview();
             return true;
-        }else{
+        } else {
             return false;
         }
 
 
     }
 
+    public boolean startPreview() {
+        if (mCamera != null) {
+            mCamera.startPreview();
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        for(PreviewFrameCallback p:previewFrameCallbackList){
+        for (PreviewFrameCallback p : previewFrameCallbackList) {
             p.onPreviewFrameCallback(data);
         }
     }
 
-    public void addPreviewFrameCallback(PreviewFrameCallback previewFrameCallback){
+    public void addPreviewFrameCallback(PreviewFrameCallback previewFrameCallback) {
         previewFrameCallbackList.add(previewFrameCallback);
     }
 
-    public void removePreviewFrameCallback(PreviewFrameCallback previewFrameCallback){
+    public void removePreviewFrameCallback(PreviewFrameCallback previewFrameCallback) {
         previewFrameCallbackList.remove(previewFrameCallback);
     }
 
-    public void cleanPreviewFrameCallback(){
+    public void cleanPreviewFrameCallback() {
         previewFrameCallbackList.clear();
     }
 
-    public interface PreviewFrameCallback{
+    public interface PreviewFrameCallback {
         void onPreviewFrameCallback(byte[] data);
     }
 }
