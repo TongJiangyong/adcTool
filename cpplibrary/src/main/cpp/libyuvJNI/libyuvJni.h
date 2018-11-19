@@ -18,6 +18,10 @@ Java_agora_Libyuv_LibyuvJava_FMTtoYUV420Planer(JNIEnv *env, jobject instance, jb
 jint nLen, jint nWidth, jint nHeight, jint pixFmt,
 jint nDegree, jbyteArray pOu_);
 
+JNIEXPORT jint  JNICALL
+Java_agora_Libyuv_LibyuvJava_RGBAoYUV420Planer(JNIEnv * env,jclass clazz,jint type,
+                                               jbyteArray rgba,jbyteArray yuv,jint width,jint height);
+
 
 #ifdef __cplusplus
 }

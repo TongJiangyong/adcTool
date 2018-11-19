@@ -1,12 +1,18 @@
 package yong.adc_tool;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
 import agora.CppLibrary;
@@ -14,6 +20,7 @@ import agora.DataTransmission.DataCallback;
 import agora.DataTransmission.LibDataTransmission;
 import agora.FileIo.FileHelper;
 import agora.Libyuv.LibyuvJava;
+import agora.Libyuv.RgbaType;
 import agora.collection.CameraHelpAPI1;
 
 /**
@@ -63,7 +70,33 @@ public class MainActivity  extends Activity implements SurfaceHolder.Callback,Ca
         Log.i("TJY","return_3 Test:"+test3);
         //TYPE 4
         libData.setDataCallback(this);
+        readFromRGBA();
+    }
 
+    public void readFromRGBA(){
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+        width=bitmap.getWidth();
+        height=bitmap.getHeight();
+        File file=new File("/sdcard/cache.yuv");
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ByteBuffer buffer=ByteBuffer.allocate(bitmap.getWidth()*bitmap.getHeight()*4);
+        bitmap.copyPixelsToBuffer(buffer);
+        byte[] yuvData=new byte[bitmap.getWidth()*bitmap.getHeight()*3/2];
+        libyuv.rgbaToYUV420Planer(RgbaType.ABGR_TO_I420,buffer.array(),yuvData,bitmap.getWidth(),bitmap.getHeight());
+//rgbToYuv(buffer.array(),bitmap.getWidth(),bitmap.getHeight(),yuvData);
+        Log.e("wuwang","width*height:"+bitmap.getWidth()+"/"+bitmap.getHeight());
+        try {
+            os.write(yuvData);
+            os.flush();
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
