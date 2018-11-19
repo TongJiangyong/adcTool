@@ -92,8 +92,29 @@ void LibyuvWrap::FMTtoYUV420Planer(const uint8* src_frame,
 }
 
 
+int LibyuvWrap::rgbaToI420(JNIEnv * env,jclass clazz,jbyteArray rgba,jint rgba_stride,
+                            jbyteArray yuv,jint y_stride,jint u_stride,jint v_stride,
+                            jint width,jint height,
+                            int (*func)(const uint8 *,int,uint8 *,int,uint8 *,int ,uint8 *,int,int,int)){
+    size_t ySize=(size_t) (y_stride * height);
+    size_t uSize=(size_t) (u_stride * height >> 1);
+    jbyte * rgbaData= env->GetByteArrayElements(rgba,JNI_FALSE);
+    jbyte * yuvData=env->GetByteArrayElements(yuv,JNI_FALSE);
+    int ret=func((const uint8 *) rgbaData, rgba_stride, (uint8 *) yuvData, y_stride,
+                 (uint8 *) (yuvData) + ySize, u_stride, (uint8 *) (yuvData )+ ySize + uSize,
+                 v_stride, width, height);
+    env->ReleaseByteArrayElements(rgba,rgbaData,JNI_OK);
+    env->ReleaseByteArrayElements(yuv,yuvData,JNI_OK);
+    return ret;
+}
+
+
+
+
 
 
 #ifdef __cplusplus
 }
+
+
 #endif

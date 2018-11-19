@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import agora.FileIo.FileHelper;
 import agora.conversion.openGlBase.gles.GlUtil;
 
 
@@ -80,7 +81,7 @@ public class ImageChange {
      * <p>
      * Expects that this object's EGL surface is current.
      */
-    public void saveFrame(File file,int width,int height) throws IOException {
+    public void saveFrameToBitmap(File file,int width,int height) throws IOException {
         // glReadPixels fills in a "direct" ByteBuffer with what is essentially big-endian RGBA
         // data (i.e. a byte of red, followed by a byte of green...).  While the Bitmap
         // constructor that takes an int[] wants little-endian ARGB (blue/red swapped), the
@@ -111,5 +112,22 @@ public class ImageChange {
         } finally {
             if (bos != null) bos.close();
         }
+    }
+
+
+    /**
+     * Saves the EGL surface to a file.
+     * <p>
+     * Expects that this object's EGL surface is current.
+     */
+    public void saveFrameToRawData(String filePath,int width,int height) throws Exception {
+        ByteBuffer buf = ByteBuffer.allocateDirect(width * height * 4);
+        buf.order(ByteOrder.LITTLE_ENDIAN);
+        GLES20.glReadPixels(0, 0, width, height,
+                GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, buf);
+        GlUtil.checkGlError("glReadPixels");
+        byte [] rgbaBuffer = FileHelper.conver(buf);
+        FileHelper.dumpRawData(filePath,rgbaBuffer);
+
     }
 }

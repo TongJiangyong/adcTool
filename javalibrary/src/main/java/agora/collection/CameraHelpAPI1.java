@@ -285,6 +285,14 @@ public class CameraHelpAPI1 implements Camera.PreviewCallback {
     }
 
 
+    public int getPreviewWidth() {
+        return previewWidth;
+    }
+
+    public int getPreviewHeight() {
+        return previewHeight;
+    }
+
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
         for (PreviewFrameCallback p : previewFrameCallbackList) {

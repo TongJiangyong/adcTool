@@ -5,6 +5,7 @@
 // Created by yong on 2018/10/22.
 //
 #include <android/log.h>
+#include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
@@ -53,7 +54,7 @@ Java_agora_DataTransmission_LibDataTransmission_javaShareData(
     env->ReleaseByteArrayElements(pOutData_, pOu, 0);
 
 }
-
+CBData g_cbData2;
 JNIEXPORT void JNICALL
 Java_agora_DataTransmission_LibDataTransmission_setByteBUffer(
         JNIEnv *env,

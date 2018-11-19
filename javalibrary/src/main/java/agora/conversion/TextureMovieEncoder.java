@@ -78,6 +78,7 @@ public class TextureMovieEncoder implements Runnable {
     private int mTextureId;
     private int mFrameNum;
     private VideoEncoderCore mVideoEncoder;
+    private boolean isUseSystemNanoTimeStamp = false;
 
     // ----- accessed by multiple threads -----
     private volatile EncoderHandler mHandler;
@@ -181,6 +182,13 @@ public class TextureMovieEncoder implements Runnable {
         mHandler.sendMessage(mHandler.obtainMessage(MSG_UPDATE_SHARED_CONTEXT, sharedContext));
     }
 
+
+
+    public void isUseSystemNanoTimeStamp(boolean isUseSystemNanoTimeStamp){
+        this.isUseSystemNanoTimeStamp = isUseSystemNanoTimeStamp;
+    }
+
+
     /**
      * Tells the video recorder that a new frame is available.  (Call from non-encoder thread.)
      * <p>
@@ -204,6 +212,9 @@ public class TextureMovieEncoder implements Runnable {
         float[] transform = new float[16];      // TODO - avoid alloc every frame
         st.getTransformMatrix(transform);
         long timestamp = st.getTimestamp();
+        if(this.isUseSystemNanoTimeStamp){
+            timestamp = System.nanoTime();
+        }
         if (timestamp == 0) {
             // Seeing this after device is toggled off/on with power button.  The
             // first frame back has a zero timestamp.

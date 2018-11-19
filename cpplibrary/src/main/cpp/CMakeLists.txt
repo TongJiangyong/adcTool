@@ -1,7 +1,8 @@
 #add .a https://blog.csdn.net/yoyo_newbie/article/details/74427938
 cmake_minimum_required (VERSION 2.8)
 project(cpplibrary)
-
+#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_C_FLAGS_DEBUG "-g -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
