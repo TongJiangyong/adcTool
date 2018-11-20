@@ -32,7 +32,7 @@ Java_agora_DataTransmission_LibDataTransmission_javaReturnData(JNIEnv *env,
     jbyte gs_raw_data[nLen];
     //create new array
     memset(&gs_raw_data,0x01,nLen);
-    __android_log_print(ANDROID_LOG_INFO, "TJY", "javaReturnData %02x,%02x,%02x,%02x",pData[0],pData[1],pData[2],pData[3]);
+    __android_log_print(ANDROID_LOG_INFO, "LibDataTraJni", "javaReturnData %02x,%02x,%02x,%02x",pData[0],pData[1],pData[2],pData[3]);
     jbyteArray jarrRV =env->NewByteArray(nLen);
     env->SetByteArrayRegion(jarrRV, 0,nLen,gs_raw_data);
     env->ReleaseByteArrayElements(pData_, pData, 0);
@@ -48,7 +48,7 @@ Java_agora_DataTransmission_LibDataTransmission_javaShareData(
         jint nLen){
     jbyte *pData = env->GetByteArrayElements(pInData_, NULL);
     jbyte *pOu = env->GetByteArrayElements(pOutData_, NULL);
-    __android_log_print(ANDROID_LOG_INFO, "TJY", "LibDataTransmission");
+    __android_log_print(ANDROID_LOG_INFO, "javaShareData", "LibDataTransmission");
     memcpy(pOu,pData,nLen);
     env->ReleaseByteArrayElements(pInData_, pData, 0);
     env->ReleaseByteArrayElements(pOutData_, pOu, 0);

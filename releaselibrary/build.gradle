@@ -34,8 +34,8 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation(name: "$cppToolName" + "_" + "$appVersion", ext: 'aar')
-    implementation(name: "$javaToolName" + "_" + "$appVersion", ext: 'aar')
+    //implementation(name: "$cppToolName" + "_" + "$appVersion", ext: 'aar')
+    //implementation(name: "$javaToolName" + "_" + "$appVersion", ext: 'aar')
 
     //implementation(name: "adcToolCpp_1.1.0", ext: 'aar')
     //implementation(name: "adcToolJava_1.1.0", ext: 'aar')

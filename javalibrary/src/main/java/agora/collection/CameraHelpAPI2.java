@@ -101,7 +101,7 @@ public class CameraHelpAPI2 {
                 //根据TextureView的尺寸设置预览尺寸
                 mPreviewSize = new Size(captureWidth, captureHeight);
                 //mPreviewSize = getOptimalSize(map.getOutputSizes(SurfaceTexture.class), width, height);
-                Log.i("TJY", "mPreviewSize:" + mPreviewSize.getWidth() + " " + mPreviewSize.getHeight());
+                Log.i(TAG, "mPreviewSize:" + mPreviewSize.getWidth() + " " + mPreviewSize.getHeight());
 
                 //获取相机支持的最大拍照尺寸
                 mCaptureSize = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new Comparator<Size>() {
@@ -110,7 +110,7 @@ public class CameraHelpAPI2 {
                         return Long.signum(lhs.getWidth() * lhs.getHeight() - rhs.getHeight() * rhs.getWidth());
                     }
                 });
-                Log.i("TJY", "mCaptureSize:" + mCaptureSize.getWidth() + " " + mCaptureSize.getHeight());
+                Log.i(TAG, "mCaptureSize:" + mCaptureSize.getWidth() + " " + mCaptureSize.getHeight());
 
                 //此ImageReader用于拍照所需
                 setupImageReader();
@@ -151,11 +151,11 @@ public class CameraHelpAPI2 {
     @SuppressLint("MissingPermission")
     public void openCamera(Surface inputSurface) {
         this.inputSurface = inputSurface;
-        Log.i("TJY", "opencamera" + mCameraId);
+        Log.i(TAG, "opencamera" + mCameraId);
         CameraManager manager = (CameraManager) this.context.getSystemService(Context.CAMERA_SERVICE);
         try {
             manager.openCamera(mCameraId, mStateCallback, mCameraHandler);
-            Log.i("TJY", "opencamera success");
+            Log.i(TAG, "opencamera success");
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -237,7 +237,7 @@ public class CameraHelpAPI2 {
         try {
             final CaptureRequest.Builder mCaptureBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             int rotation = 0;
-            Log.i("TJY", "capture:");
+            Log.i(TAG, "capture:");
             mCaptureBuilder.addTarget(mImageReader.getSurface());
             mCaptureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATION.get(rotation));
             CameraCaptureSession.CaptureCallback CaptureCallback = new CameraCaptureSession.CaptureCallback() {
@@ -303,7 +303,7 @@ public class CameraHelpAPI2 {
     private static void readImageIntoBuffer(Image image, byte[] data) {
         int width = image.getWidth();
         int height = image.getHeight();
-        Log.i("TJY", "readImageIntoBuffer:" + width + " " + height);
+        Log.i(TAG, "readImageIntoBuffer:" + width + " " + height);
         Image.Plane[] planes = image.getPlanes();
         int offset = 0;
 
@@ -338,7 +338,7 @@ public class CameraHelpAPI2 {
 
     }
 
-    private static String TAG = "TJY";
+    private static String TAG = CameraHelpAPI2.TAG;;
     private static boolean VERBOSE = true;
     private static int COLOR_FormatI420 = ImageFormat.YUV_420_888;
     private static int COLOR_FormatNV21 = ImageFormat.NV21;
@@ -434,7 +434,7 @@ public class CameraHelpAPI2 {
 
 
     public void sendFrame(Image image) {
-        Log.i("TJY", " sendFrame");
+        Log.i(TAG, " sendFrame");
 
         if (image.getFormat() == 35 && image.getPlanes().length == 3) {
             //readImageIntoBuffer(image, bytes);
@@ -443,7 +443,7 @@ public class CameraHelpAPI2 {
             this.bytes = null;
             //readImageIntoBuffer(image,bytes);
             this.bytes = getDataFromImage(image, ImageFormat.YUV_420_888);
-            Log.i("TJY","bytes:"+bytes.length);
+            Log.i(TAG,"bytes:"+bytes.length);
 /*                ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 bytes = new byte[buffer.remaining()];
                 buffer.get(bytes);//将image对象转化为byte，再转化为bitmap*/
@@ -452,7 +452,7 @@ public class CameraHelpAPI2 {
     }
 
     private void saveFrame(Image mImage) {
-        Log.i("TJY", "saveFrame");
+        Log.i(TAG, "saveFrame");
         ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
         byte[] data = new byte[buffer.remaining()];
         buffer.get(data);
@@ -490,7 +490,7 @@ public class CameraHelpAPI2 {
             try {
                 image = mImage.acquireLatestImage();
                 if (image == null) {
-                    Log.i("TJY", "image is null");
+                    Log.i(TAG, "image is null");
                     return;
                 }
                 //sendFrame(image);
