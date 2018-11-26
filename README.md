@@ -35,6 +35,7 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 Step 2. Add the dependency
+
 	dependencies {
 	        implementation 'com.github.TongJiangyong.adcTool:cpplibrary:v1.1.2'
 	        implementation 'com.github.TongJiangyong.adcTool:javalibrary:v1.1.2'
