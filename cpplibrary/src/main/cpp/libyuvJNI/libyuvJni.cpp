@@ -34,6 +34,7 @@ static int (*rgbaToI420Func[])(const uint8 *,int,uint8 *,int,uint8 *,int ,uint8 
 };
 
 static LibyuvWrap *libyuvWrap=new LibyuvWrap;
+
 JNIEXPORT void JNICALL
 Java_agora_Libyuv_LibyuvJava_FMTtoYUV420Planer(JNIEnv *env, jobject instance, jbyteArray pData_,
                                             jint nLen, jint nWidth, jint nHeight, jint pixFmt,
