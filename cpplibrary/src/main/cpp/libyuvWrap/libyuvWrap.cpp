@@ -70,6 +70,11 @@ void LibyuvWrap::FMTtoYUV420Planer(const uint8* src_frame,
             break;
         case 1:
             format = FOURCC_YV12;
+        case 2:
+            format = FOURCC_ABGR;
+            break;
+        case 3:
+            format = FOURCC_RGBA;
             break;
         default:
             break;
